@@ -1,8 +1,10 @@
 package output
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
 // FileWriter writes the output to file
@@ -20,5 +22,9 @@ func NewFileWriter(targetFile string) *FileWriter {
 }
 
 func (w *FileWriter) write(output string) error {
+	targetDir := filepath.Dir(w.targetFile)
+	if _, err := os.Stat(targetDir); os.IsNotExist(err) {
+		return fmt.Errorf("Directory %s of target file does not exist", targetDir)
+	}
 	return ioutil.WriteFile(w.targetFile, []byte(output), w.fileMode)
 }

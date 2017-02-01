@@ -9,6 +9,8 @@ before_install:
   - go get golang.org/x/tools/cmd/cover
   - go get github.com/mattn/goveralls
 
+gobuild_args: --ldflags "-X \"main.VersionString=$TRAVIS_TAG\""
+
 script:
   - go test -v -covermode=count ./...
   # TODO: Resolve how to make the coverageprofile work with multiple packages

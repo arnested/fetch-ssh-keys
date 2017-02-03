@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/ernoaapa/fetch-ssh-keys)](https://goreportcard.com/report/github.com/ernoaapa/fetch-ssh-keys)
+
 # fetch-ssh-keys
 `fetch-ssh-keys` is small shell command to get users public SSH keys from different cloud services like [GitHub](https://github.com).
 

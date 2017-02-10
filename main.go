@@ -58,6 +58,11 @@ func main() {
 					Name:  "team",
 					Usage: "Return only members of one team",
 				},
+				cli.StringFlag{
+					Name:  "file-mode",
+					Usage: "File permissions for file",
+					Value: "0600",
+				},
 			},
 			Action: func(c *cli.Context) error {
 				if c.String("organization") == "" {
@@ -73,7 +78,7 @@ func main() {
 					log.Fatalln("Failed to fetch keys", err)
 				}
 
-				return output.Write(c.GlobalString("format"), c.Args().Get(0), keys)
+				return output.Write(c.GlobalString("format"), c.Args().Get(0), os.FileMode(c.Int("file-mode")), keys)
 			},
 		},
 	}

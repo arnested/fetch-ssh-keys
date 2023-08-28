@@ -7,9 +7,9 @@ import (
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/ernoaapa/fetch-ssh-keys/fetch"
-	"github.com/ernoaapa/fetch-ssh-keys/output"
-	"github.com/ernoaapa/fetch-ssh-keys/utils"
+	"github.com/ernoaapa/fetch-ssh-keys/internal/fetch"
+	"github.com/ernoaapa/fetch-ssh-keys/internal/output"
+	"github.com/ernoaapa/fetch-ssh-keys/internal/utils"
 	"github.com/urfave/cli"
 )
 

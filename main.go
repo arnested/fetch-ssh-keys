@@ -4,16 +4,15 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/pkg/errors"
-	log "github.com/sirupsen/logrus"
-
 	"github.com/ernoaapa/fetch-ssh-keys/internal/fetch"
 	"github.com/ernoaapa/fetch-ssh-keys/internal/output"
 	"github.com/ernoaapa/fetch-ssh-keys/internal/utils"
+	"github.com/pkg/errors"
+	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 
-// Version string to be set at compile time via command line (-ldflags "-X main.VersionString=1.2.3")
+// Version string to be set at compile time via command line (-ldflags "-X main.VersionString=1.2.3").
 var (
 	VersionString string
 )

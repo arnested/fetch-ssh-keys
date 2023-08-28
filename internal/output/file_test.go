@@ -14,7 +14,7 @@ func TestFile(t *testing.T) {
 	file, createErr := os.CreateTemp("", "example")
 	assert.NoError(t, createErr, "Unable to create temp file")
 
-	writer := NewFileWriter(file.Name(), 0640)
+	writer := NewFileWriter(file.Name(), 0o640)
 
 	_ = writer.write("foobar")
 	_ = writer.write("foobar-second-time")
@@ -23,14 +23,14 @@ func TestFile(t *testing.T) {
 	assert.NoError(t, readErr, "Unable to read temp file")
 
 	info, _ := os.Stat(file.Name())
-	assert.Equal(t, 0640, int(info.Mode().Perm()), "File permission wasn't set as expected")
+	assert.Equal(t, 0o640, int(info.Mode().Perm()), "File permission wasn't set as expected")
 	assert.Equal(t, "foobar-second-time", string(fileBytes), "FileWriter didnt wrote expected output to file")
 }
 
 func TestFailIfNoDirectory(t *testing.T) {
 	log.SetLevel(log.DebugLevel)
 
-	writer := NewFileWriter("do/not/exist/my-file.txt", 0640)
+	writer := NewFileWriter("do/not/exist/my-file.txt", 0o640)
 
 	err := writer.write("foobar")
 	assert.Error(t, err, "Did not return error if directory doesn't exist")

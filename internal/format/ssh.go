@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-// ssh produces output in .ssh/authorized_keys compatible format
+// ssh produces output in .ssh/authorized_keys compatible format.
 func ssh(keysByUsername map[string][]string, comment string) string {
 	stringBuffer := bytes.NewBufferString("")
 

@@ -10,14 +10,14 @@ import (
 	"golang.org/x/oauth2"
 )
 
-// GithubFetchParams contains all parameters what are required for fetching tokens from GitHub
+// GithubFetchParams contains all parameters what are required for fetching tokens from GitHub.
 type GithubFetchParams struct {
 	Token             string
 	TeamNames         []string
 	PublicMembersOnly bool
 }
 
-// GitHubOrganisationKeys fetches organization users public SSH key from GitHub
+// GitHubOrganisationKeys fetches organization users public SSH key from GitHub.
 func GitHubOrganisationKeys(organizationName string, params GithubFetchParams) (map[string][]string, error) {
 	client := getClient(params.Token)
 	users, err := fetchUsers(client, organizationName, params)
@@ -34,13 +34,13 @@ func GitHubOrganisationKeys(organizationName string, params GithubFetchParams) (
 	return fetchUserKeys(client, usernames, params.Token)
 }
 
-// GitHubUsers fetches users public SSH keys from GitHub
+// GitHubUsers fetches users public SSH keys from GitHub.
 func GitHubUsers(usernames []string, token string) (map[string][]string, error) {
 	client := getClient(token)
 	return fetchUserKeys(client, usernames, token)
 }
 
-// GitHubDeployKeys fetches repositories' SSH keys from GitHub
+// GitHubDeployKeys fetches repositories' SSH keys from GitHub.
 func GitHubDeployKeys(ownerRepos []string, token string) (map[string][]string, error) {
 	client := getClient(token)
 	return fetchDeployKeys(client, ownerRepos, token)

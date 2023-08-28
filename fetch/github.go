@@ -51,7 +51,7 @@ func getClient(token string) *github.Client {
 		ts := oauth2.StaticTokenSource(
 			&oauth2.Token{AccessToken: token},
 		)
-		return github.NewClient(oauth2.NewClient(oauth2.NoContext, ts))
+		return github.NewClient(oauth2.NewClient(context.TODO(), ts))
 	}
 	return github.NewClient(nil)
 }

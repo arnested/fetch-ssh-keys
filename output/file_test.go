@@ -1,7 +1,6 @@
 package output
 
 import (
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -12,7 +11,7 @@ import (
 func TestFile(t *testing.T) {
 	log.SetLevel(log.DebugLevel)
 
-	file, createErr := ioutil.TempFile("", "example")
+	file, createErr := os.CreateTemp("", "example")
 	assert.NoError(t, createErr, "Unable to create temp file")
 
 	writer := NewFileWriter(file.Name(), 0640)
@@ -20,7 +19,7 @@ func TestFile(t *testing.T) {
 	writer.write("foobar")
 	writer.write("foobar-second-time")
 
-	fileBytes, readErr := ioutil.ReadFile(file.Name())
+	fileBytes, readErr := os.ReadFile(file.Name())
 	assert.NoError(t, readErr, "Unable to read temp file")
 
 	info, _ := os.Stat(file.Name())

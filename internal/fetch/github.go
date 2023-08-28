@@ -98,7 +98,7 @@ func resolveTeamID(client *github.Client, organizationName, teamName string) (in
 		}
 	}
 
-	return -1, fmt.Errorf("Unable to find team [%s] from organization [%s]", teamName, organizationName)
+	return -1, fmt.Errorf("unable to find team [%s] from organization [%s]", teamName, organizationName)
 }
 
 func fetchUserKeys(client *github.Client, usernames []string, token string) (map[string][]string, error) {

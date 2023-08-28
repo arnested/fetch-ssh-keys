@@ -93,7 +93,7 @@ func main() {
 				)
 
 				if organisation == "" && len(users) == 0 && len(ownerRepos) == 0 {
-					return fmt.Errorf("You must give either --organisation or --user or --deploy-key parameter")
+					return fmt.Errorf("you must give either --organisation or --user or --deploy-key parameter")
 				}
 
 				if c.IsSet("organization") {

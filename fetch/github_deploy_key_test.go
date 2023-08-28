@@ -1,3 +1,4 @@
+//go:build deploy_key
 // +build deploy_key
 
 package fetch
@@ -6,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/stretchr/testify/assert"
 )

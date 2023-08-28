@@ -1,8 +1,9 @@
 package output
 
 import (
-	"github.com/youtube/vitess/go/ioutil2"
 	"os"
+
+	"github.com/miku/span/atomic"
 )
 
 // FileWriter writes the output to file
@@ -20,5 +21,5 @@ func NewFileWriter(targetFile string, perm os.FileMode) *FileWriter {
 }
 
 func (w *FileWriter) write(output string) error {
-	return ioutil2.WriteFileAtomic(w.targetFile, []byte(output), w.fileMode)
+	return atomic.WriteFile(w.targetFile, []byte(output), w.fileMode)
 }

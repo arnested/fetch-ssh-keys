@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
 	"os"
 
@@ -14,6 +15,8 @@ import (
 
 // Version string to be set at compile time via command line (-ldflags "-X main.VersionString=1.2.3").
 var (
+	//go:embed LICENSE
+	license       string
 	VersionString string
 )
 
@@ -21,6 +24,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "fetch-ssh-keys"
 	app.Usage = "Fetch user public SSH keys"
+	app.Copyright = "Apache License, run `fetch-ssh-keys license` to view"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "format, f",
@@ -39,6 +43,14 @@ func main() {
 	}
 	app.Version = VersionString
 	app.Commands = []cli.Command{
+		{
+			Name:  "license",
+			Usage: "View the license",
+			Action: func(c *cli.Context) error {
+				fmt.Println(license)
+				return nil
+			},
+		},
 		{
 			Name:  "github",
 			Usage: "Get user GitHub public SSH key",

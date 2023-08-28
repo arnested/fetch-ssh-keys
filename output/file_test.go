@@ -16,8 +16,8 @@ func TestFile(t *testing.T) {
 
 	writer := NewFileWriter(file.Name(), 0640)
 
-	writer.write("foobar")
-	writer.write("foobar-second-time")
+	_ = writer.write("foobar")
+	_ = writer.write("foobar-second-time")
 
 	fileBytes, readErr := os.ReadFile(file.Name())
 	assert.NoError(t, readErr, "Unable to read temp file")

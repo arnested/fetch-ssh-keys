@@ -10,5 +10,5 @@ func TestStdout(t *testing.T) {
 	log.SetLevel(log.DebugLevel)
 
 	writer := &StdoutWriter{}
-	writer.write("whoop")
+	_ = writer.write("whoop")
 }

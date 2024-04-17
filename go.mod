@@ -1,6 +1,6 @@
 module github.com/ernoaapa/fetch-ssh-keys
 
-go 1.21.3
+go 1.22.2
 
 require (
 	github.com/google/go-github v17.0.0+incompatible

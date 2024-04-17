@@ -22,7 +22,13 @@ func TestFile(t *testing.T) {
 	fileBytes, readErr := os.ReadFile(file.Name())
 	assert.NoError(t, readErr, "Unable to read temp file")
 
-	info, _ := os.Stat(file.Name())
+	info, err := os.Stat(file.Name())
+	if err != nil || info == nil {
+		assert.Fail(t, "Unable to get file info")
+
+		return
+	}
+
 	assert.Equal(t, 0o640, int(info.Mode().Perm()), "File permission wasn't set as expected")
 	assert.Equal(t, "foobar-second-time", string(fileBytes), "FileWriter didnt wrote expected output to file")
 }

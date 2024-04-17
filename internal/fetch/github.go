@@ -106,16 +106,18 @@ func fetchUserKeys(client *github.Client, usernames []string, token string) (map
 
 	result := map[string][]string{}
 	for _, username := range usernames {
-		keys, _, err := client.Users.ListKeys(ctx, username, &github.ListOptions{})
+		keysInfo, _, err := client.Users.ListKeys(ctx, username, &github.ListOptions{})
 		if err != nil {
 			return map[string][]string{}, err
 		}
 
-		result[username] = make([]string, len(keys))
+		keys := make([]string, len(keysInfo))
 
-		for index, key := range keys {
-			result[username][index] = *key.Key
+		for index, key := range keysInfo {
+			keys[index] = *key.Key
 		}
+
+		result[username] = keys
 	}
 
 	return result, nil
@@ -127,18 +129,25 @@ func fetchDeployKeys(client *github.Client, ownerRepos []string, token string) (
 	result := map[string][]string{}
 	for _, ownerRepo := range ownerRepos {
 		ownerRepoSplit := strings.SplitN(ownerRepo, "/", 2)
+		if len(ownerRepoSplit) != 2 {
+			log.Warnf("Invalid owner/repo format: %s", ownerRepo)
+			continue
+		}
+
 		owner := ownerRepoSplit[0]
 		repo := ownerRepoSplit[1]
-		keys, _, err := client.Repositories.ListKeys(ctx, owner, repo, &github.ListOptions{})
+		keysInfo, _, err := client.Repositories.ListKeys(ctx, owner, repo, &github.ListOptions{})
 		if err != nil {
 			return map[string][]string{}, err
 		}
 
-		result[ownerRepo] = make([]string, len(keys))
+		keys := make([]string, len(keysInfo))
 
-		for index, key := range keys {
-			result[ownerRepo][index] = *key.Key
+		for index, key := range keysInfo {
+			keys[index] = *key.Key
 		}
+
+		result[ownerRepo] = keys
 	}
 
 	return result, nil

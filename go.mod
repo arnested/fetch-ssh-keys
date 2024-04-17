@@ -1,4 +1,4 @@
-module github.com/ernoaapa/fetch-ssh-keys
+module arnested.dk/go/fetch-ssh-keys
 
 go 1.22.2
 

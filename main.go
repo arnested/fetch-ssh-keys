@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ernoaapa/fetch-ssh-keys/internal/fetch"
-	"github.com/ernoaapa/fetch-ssh-keys/internal/output"
-	"github.com/ernoaapa/fetch-ssh-keys/internal/utils"
+	"arnested.dk/go/fetch-ssh-keys/internal/fetch"
+	"arnested.dk/go/fetch-ssh-keys/internal/output"
+	"arnested.dk/go/fetch-ssh-keys/internal/utils"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"

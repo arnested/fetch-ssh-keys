@@ -1,7 +1,7 @@
 # fetch-ssh-keys
 
 [![Build Status](https://travis-ci.org/ernoaapa/fetch-ssh-keys.svg?branch=master)](https://travis-ci.org/ernoaapa/fetch-ssh-keys)
-[![Go Report Card](https://goreportcard.com/badge/github.com/ernoaapa/fetch-ssh-keys)](https://goreportcard.com/report/github.com/ernoaapa/fetch-ssh-keys)
+[![Go Report Card](https://goreportcard.com/badge/arnested.dk/go/fetch-ssh-keys)](https://goreportcard.com/report/arnested.dk/go/fetch-ssh-keys)
 
 `fetch-ssh-keys` is small shell command to get users public SSH keys from different cloud services like [GitHub](https://github.com).
 
@@ -27,7 +27,7 @@ fetch-ssh-keys github --deploy-key ernoaapa/fetch-ssh-keys  --token YOUR-TOKEN-H
 Tool can be used for example to automatically update `.ssh/authorized_keys` file by giving path to `.ssh/authorized_keys` as last argument and adding the script to cron job.
 
 ## Installation
-- Download binary from [releases](https://github.com/ernoaapa/fetch-ssh-keys/releases)
+- Download binary from [releases](https://arnested.dk/go/fetch-ssh-keys/releases)
 - Give execution rights (`chmod +x fetch-ssh-keys`) and add it into your $PATH
 
 ### Configuration

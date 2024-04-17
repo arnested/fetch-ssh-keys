@@ -3,7 +3,7 @@ package output
 import (
 	"os"
 
-	"github.com/ernoaapa/fetch-ssh-keys/internal/format"
+	"arnested.dk/go/fetch-ssh-keys/internal/format"
 )
 
 // Writer is interface for all output writers.

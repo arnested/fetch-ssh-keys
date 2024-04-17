@@ -34,8 +34,10 @@ as last argument and adding the script to cron job.
 
 ## Installation
 
-- Download binary from
-  [releases](https://arnested.dk/go/fetch-ssh-keys/releases)
+- Download binary from [latest
+  release](https://github.com/arnested/fetch-ssh-keys/releases/latest)
+  or install with Go: `go install
+  arnested.dk/go/fetch-ssh-keys@latest`
 - Give execution rights (`chmod +x fetch-ssh-keys`) and add it into
   your $PATH
 

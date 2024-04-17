@@ -8,16 +8,16 @@ import (
 
 func TestMergeKeys(t *testing.T) {
 	result := MergeKeys(map[string][]string{
-		"user-1": []string{"key1"},
-		"user-2": []string{"key1"},
+		"user-1": {"key1"},
+		"user-2": {"key1"},
 	}, map[string][]string{
-		"user-2": []string{"key2"},
-		"user-3": []string{"key1"},
+		"user-2": {"key2"},
+		"user-3": {"key1"},
 	})
 
 	assert.Equal(t, map[string][]string{
-		"user-1": []string{"key1"},
-		"user-2": []string{"key1", "key2"},
-		"user-3": []string{"key1"},
+		"user-1": {"key1"},
+		"user-2": {"key1", "key2"},
+		"user-3": {"key1"},
 	}, result)
 }

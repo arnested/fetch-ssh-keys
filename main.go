@@ -1,20 +1,22 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
 	"os"
 
-	log "github.com/Sirupsen/logrus"
+	"arnested.dk/go/fetch-ssh-keys/internal/fetch"
+	"arnested.dk/go/fetch-ssh-keys/internal/output"
+	"arnested.dk/go/fetch-ssh-keys/internal/utils"
 	"github.com/pkg/errors"
-
-	"github.com/ernoaapa/fetch-ssh-keys/fetch"
-	"github.com/ernoaapa/fetch-ssh-keys/output"
-	"github.com/ernoaapa/fetch-ssh-keys/utils"
+	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 
-// Version string to be set at compile time via command line (-ldflags "-X main.VersionString=1.2.3")
+// Version string to be set at compile time via command line (-ldflags "-X main.VersionString=1.2.3").
 var (
+	//go:embed LICENSE
+	license       string
 	VersionString string
 )
 
@@ -22,6 +24,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "fetch-ssh-keys"
 	app.Usage = "Fetch user public SSH keys"
+	app.Copyright = "Apache License, run `fetch-ssh-keys license` to view"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "format, f",
@@ -40,6 +43,14 @@ func main() {
 	}
 	app.Version = VersionString
 	app.Commands = []cli.Command{
+		{
+			Name:  "license",
+			Usage: "View the license",
+			Action: func(c *cli.Context) error {
+				fmt.Println(license)
+				return nil
+			},
+		},
 		{
 			Name:  "github",
 			Usage: "Get user GitHub public SSH key",
@@ -93,7 +104,7 @@ func main() {
 				)
 
 				if organisation == "" && len(users) == 0 && len(ownerRepos) == 0 {
-					return fmt.Errorf("You must give either --organisation or --user or --deploy-key parameter")
+					return fmt.Errorf("you must give either --organisation or --user or --deploy-key parameter")
 				}
 
 				if c.IsSet("organization") {

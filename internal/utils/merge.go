@@ -1,6 +1,6 @@
 package utils
 
-// MergeKeys merges key maps together to single map
+// MergeKeys merges key maps together to single map.
 func MergeKeys(keySets ...map[string][]string) map[string][]string {
 	result := make(map[string][]string)
 

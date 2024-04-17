@@ -1,0 +1,46 @@
+---
+on: push
+name: Build and test
+permissions:
+  contents: write
+jobs:
+  build_and_test:
+    name: Build and test
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: WillAbides/setup-go-faster@v1.14.0
+        with:
+          go-version-file: go.mod
+      - name: go version
+        env:
+          GO111MODULE: 'on'
+        run: go version
+      - name: Test
+        uses: robherley/go-test-action@v0.2.0
+        with:
+          testArguments: -race -cover -covermode=atomic -coverprofile=coverage.txt ./...
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v5
+        with:
+          version: latest
+          args: release --snapshot
+
+  nilaway:
+    name: Nilaway
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: WillAbides/setup-go-faster@v1.14.0
+        with:
+          go-version-file: go.mod
+      - name: Install nilaway
+        run: go install go.uber.org/nilaway/cmd/nilaway@latest
+      - name: Run nilaway
+        run: nilaway ./...

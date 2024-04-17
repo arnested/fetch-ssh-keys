@@ -5,19 +5,19 @@ import (
 	"fmt"
 	"strings"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/google/go-github/github"
+	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 )
 
-// GithubFetchParams contains all parameters what are required for fetching tokens from GitHub
+// GithubFetchParams contains all parameters what are required for fetching tokens from GitHub.
 type GithubFetchParams struct {
 	Token             string
 	TeamNames         []string
 	PublicMembersOnly bool
 }
 
-// GitHubOrganisationKeys fetches organization users public SSH key from GitHub
+// GitHubOrganisationKeys fetches organization users public SSH key from GitHub.
 func GitHubOrganisationKeys(organizationName string, params GithubFetchParams) (map[string][]string, error) {
 	client := getClient(params.Token)
 	users, err := fetchUsers(client, organizationName, params)
@@ -34,13 +34,13 @@ func GitHubOrganisationKeys(organizationName string, params GithubFetchParams) (
 	return fetchUserKeys(client, usernames, params.Token)
 }
 
-// GitHubUsers fetches users public SSH keys from GitHub
+// GitHubUsers fetches users public SSH keys from GitHub.
 func GitHubUsers(usernames []string, token string) (map[string][]string, error) {
 	client := getClient(token)
 	return fetchUserKeys(client, usernames, token)
 }
 
-// GitHubDeployKeys fetches repositories' SSH keys from GitHub
+// GitHubDeployKeys fetches repositories' SSH keys from GitHub.
 func GitHubDeployKeys(ownerRepos []string, token string) (map[string][]string, error) {
 	client := getClient(token)
 	return fetchDeployKeys(client, ownerRepos, token)
@@ -51,7 +51,7 @@ func getClient(token string) *github.Client {
 		ts := oauth2.StaticTokenSource(
 			&oauth2.Token{AccessToken: token},
 		)
-		return github.NewClient(oauth2.NewClient(oauth2.NoContext, ts))
+		return github.NewClient(oauth2.NewClient(context.TODO(), ts))
 	}
 	return github.NewClient(nil)
 }
@@ -98,7 +98,7 @@ func resolveTeamID(client *github.Client, organizationName, teamName string) (in
 		}
 	}
 
-	return -1, fmt.Errorf("Unable to find team [%s] from organization [%s]", teamName, organizationName)
+	return -1, fmt.Errorf("unable to find team [%s] from organization [%s]", teamName, organizationName)
 }
 
 func fetchUserKeys(client *github.Client, usernames []string, token string) (map[string][]string, error) {
@@ -106,16 +106,18 @@ func fetchUserKeys(client *github.Client, usernames []string, token string) (map
 
 	result := map[string][]string{}
 	for _, username := range usernames {
-		keys, _, err := client.Users.ListKeys(ctx, username, &github.ListOptions{})
+		keysInfo, _, err := client.Users.ListKeys(ctx, username, &github.ListOptions{})
 		if err != nil {
 			return map[string][]string{}, err
 		}
 
-		result[username] = make([]string, len(keys))
+		keys := make([]string, len(keysInfo))
 
-		for index, key := range keys {
-			result[username][index] = *key.Key
+		for index, key := range keysInfo {
+			keys[index] = *key.Key
 		}
+
+		result[username] = keys
 	}
 
 	return result, nil
@@ -127,18 +129,25 @@ func fetchDeployKeys(client *github.Client, ownerRepos []string, token string) (
 	result := map[string][]string{}
 	for _, ownerRepo := range ownerRepos {
 		ownerRepoSplit := strings.SplitN(ownerRepo, "/", 2)
+		if len(ownerRepoSplit) != 2 {
+			log.Warnf("Invalid owner/repo format: %s", ownerRepo)
+			continue
+		}
+
 		owner := ownerRepoSplit[0]
 		repo := ownerRepoSplit[1]
-		keys, _, err := client.Repositories.ListKeys(ctx, owner, repo, &github.ListOptions{})
+		keysInfo, _, err := client.Repositories.ListKeys(ctx, owner, repo, &github.ListOptions{})
 		if err != nil {
 			return map[string][]string{}, err
 		}
 
-		result[ownerRepo] = make([]string, len(keys))
+		keys := make([]string, len(keysInfo))
 
-		for index, key := range keys {
-			result[ownerRepo][index] = *key.Key
+		for index, key := range keysInfo {
+			keys[index] = *key.Key
 		}
+
+		result[ownerRepo] = keys
 	}
 
 	return result, nil

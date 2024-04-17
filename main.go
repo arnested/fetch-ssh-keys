@@ -4,20 +4,22 @@ import (
 	_ "embed"
 	"fmt"
 	"os"
+	"runtime/debug"
 
 	"arnested.dk/go/fetch-ssh-keys/internal/fetch"
 	"arnested.dk/go/fetch-ssh-keys/internal/output"
 	"arnested.dk/go/fetch-ssh-keys/internal/utils"
+	"github.com/carlmjohnson/versioninfo"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 
-// Version string to be set at compile time via command line (-ldflags "-X main.VersionString=1.2.3").
 var (
 	//go:embed LICENSE
-	license       string
-	VersionString string
+	license string
+	// Version is the version string to be set at compile time via command line.
+	version string
 )
 
 func main() {
@@ -41,7 +43,7 @@ func main() {
 			Usage: "Include `COMMENT` at top and bottom",
 		},
 	}
-	app.Version = VersionString
+	app.Version = getVersion()
 	app.Commands = []cli.Command{
 		{
 			Name:  "license",
@@ -140,4 +142,22 @@ func main() {
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func getVersion() string {
+	if version == "" {
+		version = versioninfo.Revision
+
+		if versioninfo.DirtyBuild {
+			version += "-dirty"
+		}
+	}
+
+	buildinfo, ok := debug.ReadBuildInfo()
+
+	if ok && (buildinfo != nil) && (buildinfo.Main.Version != "(devel)") {
+		version = buildinfo.Main.Version
+	}
+
+	return version
 }

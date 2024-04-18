@@ -14,6 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: reviewdog/action-actionlint@v1
+  hadolint:
+    name: hadolint
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          trusted-registries: docker.io
+          dockerfile: 'Dockerfile'
   markdownlint:
     name: markdown
     runs-on: ubuntu-22.04

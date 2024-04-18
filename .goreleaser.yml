@@ -14,6 +14,21 @@ archives:
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
+dockers:
+  - image_templates:
+      - 'ghcr.io/arnested/{{ .ProjectName }}:{{ .Tag }}'
+      - 'ghcr.io/arnested/{{ .ProjectName }}:v{{ .Major }}'
+      - 'ghcr.io/arnested/{{ .ProjectName }}:latest'
+    goos: linux
+    goarch: amd64
+    skip_push: auto
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.CommitDate}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.source=https://github.com/arnested/{{.ProjectName}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
 checksum:
   name_template: 'checksums.txt'
 snapshot:

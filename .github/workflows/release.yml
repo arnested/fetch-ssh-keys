@@ -8,7 +8,6 @@ on:
       - completed
 permissions:
   contents: write
-  packages: write
 jobs:
   bump-version:
     runs-on: ubuntu-22.04
@@ -41,4 +40,4 @@ jobs:
           version: latest
           args: release
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

@@ -8,6 +8,7 @@ on:
       - completed
 permissions:
   contents: write
+  packages: write
 jobs:
   bump-version:
     runs-on: ubuntu-22.04

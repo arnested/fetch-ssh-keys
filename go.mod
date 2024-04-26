@@ -3,8 +3,9 @@ module arnested.dk/go/fetch-ssh-keys
 go 1.22.2
 
 require (
+	github.com/carlmjohnson/versioninfo v0.22.5
 	github.com/google/go-github v17.0.0+incompatible
-	github.com/miku/span v0.1.360
+	github.com/miku/span v0.1.361
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.9.0
@@ -13,7 +14,6 @@ require (
 )
 
 require (
-	github.com/carlmjohnson/versioninfo v0.22.5 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.4 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect

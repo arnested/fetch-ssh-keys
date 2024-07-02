@@ -1,6 +1,6 @@
 module arnested.dk/go/fetch-ssh-keys
 
-go 1.22.4
+go 1.22.5
 
 require (
 	github.com/carlmjohnson/versioninfo v0.22.5

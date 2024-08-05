@@ -10,7 +10,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.9.0
 	github.com/urfave/cli v1.22.15
-	golang.org/x/oauth2 v0.21.0
+	golang.org/x/oauth2 v0.22.0
 )
 
 require (

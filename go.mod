@@ -8,7 +8,7 @@ require (
 	github.com/miku/span v0.2.10
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.3
-	github.com/stretchr/testify v1.11.0
+	github.com/stretchr/testify v1.11.1
 	github.com/urfave/cli v1.22.17
 	golang.org/x/oauth2 v0.30.0
 )

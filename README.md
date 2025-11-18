@@ -54,7 +54,7 @@ as last argument and adding the script to cron job.
 | Parameter      | Description                                                                                               |
 |----------------|-----------------------------------------------------------------------------------------------------------|
 | --organization | Name of the organization which members keys to pick                                                       |
-| --team         | Name or slug of the team which members keys to pick                                                               |
+| --team         | Name or slug of the team which members keys to pick                                                       |
 | --user         | Name of the user which keys to pick                                                                       |
 | --deploy-key   | Name of the owner/repo which deploy keys to pick                                                          |
 | --token        | GitHub API token to use for communication. Without token you get only public members of the organization. |

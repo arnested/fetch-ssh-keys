@@ -12,7 +12,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: WillAbides/setup-go-faster@v1.14.0
+        uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
       - name: go version
@@ -37,7 +37,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: WillAbides/setup-go-faster@v1.14.0
+        uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
       - name: Install nilaway

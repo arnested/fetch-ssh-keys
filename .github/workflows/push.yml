@@ -15,10 +15,6 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
-      - name: go version
-        env:
-          GO111MODULE: 'on'
-        run: go version
       - name: Test
         uses: robherley/go-test-action@v0.7.1
         with:

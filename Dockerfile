@@ -1,5 +1,6 @@
 FROM scratch
 
-COPY fetch-ssh-keys /fetch-ssh-keys
+ARG TARGETPLATFORM
+COPY $TARGETPLATFORM/fetch-ssh-keys /fetch-ssh-keys
 
 ENTRYPOINT ["/fetch-ssh-keys"]

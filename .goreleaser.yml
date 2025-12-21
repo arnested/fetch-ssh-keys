@@ -1,12 +1,19 @@
 ---
-before:
-  hooks:
-    - go mod download
+version: 2
 builds:
-  - env:
+  - id: default
+    env:
       - CGO_ENABLED=0
+  - id: with-certs
+    env:
+      - CGO_ENABLED=0
+    tags:
+      - certs
 archives:
-  - format: binary
+  - formats:
+      - binary
+    ids:
+      - default
     name_template: >-
       {{ .ProjectName }}_
       {{- if eq .Os "linux" }}Linux
@@ -14,25 +21,25 @@ archives:
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
-dockers:
-  - image_templates:
-      - 'ghcr.io/arnested/{{ .ProjectName }}:{{ .Tag }}'
-      - 'ghcr.io/arnested/{{ .ProjectName }}:v{{ .Major }}'
-      - 'ghcr.io/arnested/{{ .ProjectName }}:latest'
-    goos: linux
-    goarch: amd64
-    skip_push: auto
-    build_flag_templates:
-      - "--pull"
-      - "--label=org.opencontainers.image.created={{.CommitDate}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.source=https://github.com/arnested/{{.ProjectName}}"
-      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
+dockers_v2:
+  - images:
+      - 'ghcr.io/arnested/{{ .ProjectName }}'
+    tags:
+      - '{{ .Tag }}'
+      - 'v{{ .Major }}'
+      - 'latest'
+    ids:
+      - with-certs
+    labels:
+      "org.opencontainers.image.created": "{{.CommitDate}}"
+      "org.opencontainers.image.revision": "{{.FullCommit}}"
+      "org.opencontainers.image.source": "https://github.com/arnested/{{.ProjectName}}"
+      "org.opencontainers.image.title": "{{.ProjectName}}"
+      "org.opencontainers.image.version": "{{.Version}}"
 checksum:
   name_template: 'checksums.txt'
 snapshot:
-  name_template: "{{ .Tag }}-next"
+  version_template: "{{ .Tag }}-next"
 changelog:
   sort: asc
   filters:

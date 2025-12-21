@@ -44,7 +44,6 @@ jobs:
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
-          version: latest
           args: release
         env:
           GITHUB_TOKEN: ${{ github.token }}

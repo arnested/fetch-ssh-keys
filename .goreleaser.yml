@@ -30,6 +30,7 @@ dockers_v2:
       - 'latest'
     ids:
       - with-certs
+    sbom: false
     labels:
       "org.opencontainers.image.created": "{{.CommitDate}}"
       "org.opencontainers.image.revision": "{{.FullCommit}}"

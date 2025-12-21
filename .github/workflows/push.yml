@@ -15,14 +15,14 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
-      - name: go version
-        env:
-          GO111MODULE: 'on'
-        run: go version
-      - name: Test
+      - name: Run go test
         uses: robherley/go-test-action@v0.7.1
         with:
           testArguments: -race -cover -covermode=atomic -coverprofile=coverage.txt ./...
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:

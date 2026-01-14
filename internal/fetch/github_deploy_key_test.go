@@ -1,5 +1,4 @@
 //go:build deploy_key
-// +build deploy_key
 
 package fetch
 

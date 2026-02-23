@@ -17,8 +17,8 @@ github.com/klauspost/compress v1.18.4 h1:RPhnKRAQ4Fh8zU2FY/6ZFDwTVTxgJ/EMydqSTzE
 github.com/klauspost/compress v1.18.4/go.mod h1:R0h/fSBs8DE4ENlcrlib3PsXS61voFxhIs2DeRhCvJ4=
 github.com/klauspost/pgzip v1.2.6 h1:8RXeL5crjEUFnR2/Sn6GJNWtSQ3Dk8pq4CL3jvdDyjU=
 github.com/klauspost/pgzip v1.2.6/go.mod h1:Ch1tH69qFZu15pkjo5kYi6mth2Zzwzt50oCQKQE9RUs=
-github.com/miku/span v0.2.17 h1:h3E1gNZQ46GLnH6Y7L62/7g7Ut8LSnCzzmTJ5mx11iQ=
-github.com/miku/span v0.2.17/go.mod h1:P/C3m3Hg6snS6y7/lRNUsl/kMjXjKklbdvXNTaPz/7I=
+github.com/miku/span v0.2.19 h1:uwVmherM/y/zYdrhygCBqxq/Z9mCp7szUNTYFkHleQs=
+github.com/miku/span v0.2.19/go.mod h1:P/C3m3Hg6snS6y7/lRNUsl/kMjXjKklbdvXNTaPz/7I=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=

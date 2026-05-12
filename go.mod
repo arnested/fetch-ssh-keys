@@ -5,7 +5,7 @@ go 1.26.3
 require (
 	github.com/carlmjohnson/versioninfo v0.22.5
 	github.com/google/go-github v17.0.0+incompatible
-	github.com/miku/span v0.2.33
+	github.com/miku/span v0.2.34
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.4
 	github.com/stretchr/testify v1.11.1

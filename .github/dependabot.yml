@@ -4,15 +4,15 @@ updates:
   - package-ecosystem: docker
     directory: "/"
     schedule:
-      interval: daily
+      interval: monthly
       timezone: Europe/Copenhagen
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: daily
+      interval: monthly
       timezone: Europe/Copenhagen
   - package-ecosystem: gomod
     directory: "/"
     schedule:
-      interval: daily
+      interval: monthly
       timezone: Europe/Copenhagen
